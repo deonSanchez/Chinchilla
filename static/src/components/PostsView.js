@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/data';
+import PostCard from "./PostCard";
 
 function mapStateToProps(state) {
     return {
         data: state.data,
-        token: state.auth.token,
         loaded: state.data.loaded,
         isFetching: state.data.isFetching,
     };
@@ -24,18 +24,18 @@ export default class PostsView extends React.Component {
 
 
     fetchData() {
-        this.props.fetchPostData();
+        this.props.fetchData();
     }
 
     render() {
         return (
             <div>
-                <h1>Test H1</h1>
+                <h1>Posts</h1>
                 {!this.props.loaded
                     ? <h1>Loading data...</h1>
                     :
                     <div>
-                        <h1>{this.props.data.data.title}</h1>
+                        <PostCard title={this.props.data.data.title} body={this.props.data.data.body} />
                     </div>
                 }
             </div>
@@ -44,9 +44,7 @@ export default class PostsView extends React.Component {
 }
 
 PostsView.propTypes = {
-    fetchPostData: React.PropTypes.func,
+    fetchData: React.PropTypes.func,
     loaded: React.PropTypes.bool,
-    userName: React.PropTypes.string,
     data: React.PropTypes.any,
-    token: React.PropTypes.string,
 };

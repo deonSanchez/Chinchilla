@@ -33,7 +33,6 @@ export function fetchDataRequest() {
     };
 }
 
-// TODO: this should be generalized
 export function fetchProtectedData(token) {
     return (dispatch) => {
         dispatch(fetchProtectedDataRequest());
@@ -51,13 +50,13 @@ export function fetchProtectedData(token) {
 }
 
 
-export function fetchPostData() {
+export function fetchData() {
     return (dispatch) => {
         dispatch(fetchDataRequest());
         get_all_posts()
             .then(parseJSON)
             .then(response => {
-                dispatch(receiveData(response.result));
+                dispatch(receiveData(response));
             })
             .catch(error => {
                 if (error.status === 401) {
