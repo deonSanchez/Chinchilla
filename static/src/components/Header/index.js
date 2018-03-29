@@ -69,6 +69,9 @@ export class Header extends Component {
                     {
                         !this.props.isAuthenticated ?
                             <div>
+                                <MenuItem onClick={() => this.dispatchNewRoute('/posts')}>
+                                    Posts
+                                </MenuItem>
                                 <MenuItem onClick={() => this.dispatchNewRoute('/login')}>
                                     Login
                                 </MenuItem>

@@ -23,7 +23,7 @@ export default (
         <Route path="login" component={requireNoAuthentication(LoginView)} />
         <Route path="register" component={requireNoAuthentication(RegisterView)} />
         <Route path="home" component={requireNoAuthentication(HomeContainer)} />
-        <Route path="post" component={requireNoAuthentication(PostsView)} />
+        <Route path="posts" component={requireNoAuthentication(PostsView)} />
         <Route path="analytics" component={requireAuthentication(Analytics)} />
         <Route path="*" component={DetermineAuth(NotFound)} />
     </Route>
