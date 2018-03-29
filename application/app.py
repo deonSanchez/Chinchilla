@@ -1,5 +1,5 @@
 from flask import request, render_template, jsonify, url_for, redirect, g
-from .models import User
+from .models import User, Post
 from index import app, db
 from sqlalchemy.exc import IntegrityError
 from .utils.auth import generate_token, requires_auth, verify_token
@@ -19,6 +19,15 @@ def any_root_path(path):
 @requires_auth
 def get_user():
     return jsonify(result=g.current_user)
+
+
+@app.route("/api/post", methods=["GET"])
+def get_post():
+    post = Post.query.first()
+    return jsonify(
+        title=post.title,
+        body=post.body
+    )
 
 
 @app.route("/api/create_user", methods=["POST"])

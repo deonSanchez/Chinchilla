@@ -72,6 +72,7 @@ export function requireNoAuthentication(Component) {
         }
 
         render() {
+            console.log(Component);
             return (
                 <div>
                     {!this.props.isAuthenticated && this.state.loaded

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../../actions/data';
+import * as actionCreators from '../actions/data';
 
 function mapStateToProps(state) {
     return {
@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export class Home extends React.Component {
+export default class PostsView extends React.Component {
     componentDidMount() {
         this.fetchData();
     }
@@ -30,13 +30,11 @@ export class Home extends React.Component {
     render() {
         return (
             <div>
+                <h1>Test H1</h1>
                 {!this.props.loaded
                     ? <h1>Loading data...</h1>
                     :
                     <div>
-                        <h1>Welcome back,&nbsp;
-                            {this.props.userName}!</h1>
-                        <h1>{this.props.data.data.email}</h1>
                         <h1>{this.props.data.data.title}</h1>
                     </div>
                 }
@@ -45,7 +43,7 @@ export class Home extends React.Component {
     }
 }
 
-Home.propTypes = {
+PostsView.propTypes = {
     fetchPostData: React.PropTypes.func,
     loaded: React.PropTypes.bool,
     userName: React.PropTypes.string,
