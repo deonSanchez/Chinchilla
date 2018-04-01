@@ -41,9 +41,11 @@ export default class RegisterView extends React.Component {
             email: '',
             username: '',
             password: '',
+            password2: '',
             email_error_text: null,
             username_error_text: null,
             password_error_text: null,
+            password2_error_text: null,
             redirectTo: redirectRoute,
             disabled: true,
         };
@@ -53,6 +55,7 @@ export default class RegisterView extends React.Component {
         let email_is_valid = false;
         let username_is_valid = false;
         let password_is_valid = false;
+        let password2_is_valid = false;
 
         if (this.state.email === '') {
             this.setState({
@@ -97,10 +100,20 @@ export default class RegisterView extends React.Component {
             this.setState({
                 password_error_text: 'Your password must be at least 6 characters',
             });
-
         }
 
-        if (email_is_valid && password_is_valid && username_is_valid) {
+        if (this.state.password2 == this.state.password) {
+            password2_is_valid = true;
+            this.setState({
+                password2_error_text: null,
+            });
+        } else if (this.state.password != this.state.password2){
+            this.setState({
+                password2_error_text: 'Your passwords don\'t match' ,
+            });
+        }
+
+        if (email_is_valid && password_is_valid && password2_is_valid && username_is_valid) {
             this.setState({
                 disabled: false,
             });
@@ -127,7 +140,7 @@ export default class RegisterView extends React.Component {
 
     login(e) {
         e.preventDefault();
-        this.props.registerUser(this.state.email, this.state.username, this.state.password, this.state.redirectTo);
+        this.props.registerUser(this.state.email, this.state.username, this.state.password, this.state.password2, this.state.redirectTo);
     }
 
     render() {
@@ -168,6 +181,14 @@ export default class RegisterView extends React.Component {
                               type="password"
                               errorText={this.state.password_error_text}
                               onChange={(e) => this.changeValue(e, 'password')}
+                            />
+                        </div>
+                        <div className="col-md-12">
+                            <TextField
+                              floatingLabelText="Confirm Password"
+                              type="password"
+                              errorText={this.state.password2_error_text}
+                              onChange={(e) => this.changeValue(e, 'password2')}
                             />
                         </div>
 
