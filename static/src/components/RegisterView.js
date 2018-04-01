@@ -39,8 +39,10 @@ export default class RegisterView extends React.Component {
         const redirectRoute = '/login';
         this.state = {
             email: '',
+            username: '',
             password: '',
             email_error_text: null,
+            username_error_text: null,
             password_error_text: null,
             redirectTo: redirectRoute,
             disabled: true,
@@ -49,6 +51,7 @@ export default class RegisterView extends React.Component {
 
     isDisabled() {
         let email_is_valid = false;
+        let username_is_valid = false;
         let password_is_valid = false;
 
         if (this.state.email === '') {
@@ -60,10 +63,24 @@ export default class RegisterView extends React.Component {
             this.setState({
                 email_error_text: null,
             });
-
         } else {
             this.setState({
                 email_error_text: 'Sorry, this is not a valid email',
+            });
+        }
+
+        if (this.state.username === '' || !this.state.username) {
+            this.setState({
+                username_error_text: null,
+            });
+        } else if (this.state.username.length >= 5) {
+            username_is_valid = true;
+            this.setState({
+                username_error_text: null,
+            });
+        } else {
+            this.setState({
+                username_error_text: 'This username sucks, pick a new one',
             });
         }
 
@@ -83,7 +100,7 @@ export default class RegisterView extends React.Component {
 
         }
 
-        if (email_is_valid && password_is_valid) {
+        if (email_is_valid && password_is_valid && username_is_valid) {
             this.setState({
                 disabled: false,
             });
@@ -110,7 +127,7 @@ export default class RegisterView extends React.Component {
 
     login(e) {
         e.preventDefault();
-        this.props.registerUser(this.state.email, this.state.password, this.state.redirectTo);
+        this.props.registerUser(this.state.email, this.state.username, this.state.password, this.state.redirectTo);
     }
 
     render() {
@@ -133,6 +150,15 @@ export default class RegisterView extends React.Component {
                               type="email"
                               errorText={this.state.email_error_text}
                               onChange={(e) => this.changeValue(e, 'email')}
+                            />
+                        </div>
+                        <div className="col-md-12">
+                            <TextField
+                              hintText="Username"
+                              floatingLabelText="Username"
+                              type="username"
+                              errorText={this.state.username_error_text}
+                              onChange={(e) => this.changeValue(e, 'username')}
                             />
                         </div>
                         <div className="col-md-12">
