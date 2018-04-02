@@ -71,16 +71,21 @@ export class Header extends Component {
   }
 
   render() {
+    var navFlatButtonsStyle = {
+      color: 'white',
+      padding: '6px',
+    }
+
     const actions = [
       <FlatButton
-      label="Cancel"
-      primary={true}
-      onClick={this.handleClose}
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
       />,
       <FlatButton
-      label="Post"
-      primary={true}
-      onClick={this.handleClose}
+        label="Post"
+        primary={true}
+        onClick={this.handleClose}
       />,
     ];
 
@@ -117,8 +122,8 @@ export class Header extends Component {
       onLeftIconButtonTouchTap={() => this.openNav()}
       iconElementRight={
         <div>
-        <FlatButton label="Home" onClick={() => this.dispatchNewRoute('/')} />
-        <FlatButton label="Post" onClick={this.handleOpen} />
+        <FlatButton label="Home" style={navFlatButtonsStyle} onClick={() => this.dispatchNewRoute('/')} />
+        <FlatButton label="Post" style={navFlatButtonsStyle} onClick={this.handleOpen} />
           <Dialog
             actions={actions}
             modal={false}
