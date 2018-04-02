@@ -3,12 +3,14 @@ from index import db, bcrypt
 
 class User(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
+    username = db.Column(db.String(255), unique=True)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
 
-    def __init__(self, email, password):
+    def __init__(self, email, username, password):
         self.email = email
         self.active = True
+        self.username = username
         self.password = User.hashed_password(password)
 
     @staticmethod
@@ -26,6 +28,7 @@ class User(db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
+    author = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     title = db.Column(db.String(255), unique=True)
     body = db.Column(db.String(255))
 

@@ -36,7 +36,8 @@ export default class PostsView extends React.Component {
                 posts.push(
                     <PostCard
                         title={post_data[i].title}
-                        body={post_data[i].body} />,
+                        body={post_data[i].body}
+                        author={post_data[i].author} />,
                     <br />
                 )
             }

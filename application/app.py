@@ -28,7 +28,11 @@ def get_post():
         {
             'id': p.id,
             'title': p.title,
-            'body': p.body
+            'body': p.body,
+            'author': {
+                'username': User.query.get(p.author).username,
+                'email': User.query.get(p.author).email
+            }
         } for p in post
     ])
 
@@ -38,6 +42,7 @@ def create_user():
     incoming = request.get_json()
     user = User(
         email=incoming["email"],
+        username=incoming["username"],
         password=incoming["password"]
     )
     db.session.add(user)

@@ -5,8 +5,8 @@ import FlatButton from 'material-ui/FlatButton';
 const CardExampleWithAvatar = (props) => (
     <Card>
         <CardHeader
-            title="Test User"
-            subtitle="User subtitle"
+            title={props.author.username}
+            subtitle={props.author.email}
             avatar="http://i.pravatar.cc/300"
         />
         <CardTitle title={props.title} subtitle="Post tags"/>
