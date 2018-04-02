@@ -28,6 +28,17 @@ export default class PostsView extends React.Component {
     }
 
     render() {
+        let posts = [];
+        if(this.props.loaded) {
+            let post_data = this.props.data.data;
+            post_data.sort(function(a, b) {return b.id - a.id});
+
+            for (let i = 0; i < post_data.length; i++) {
+                posts.push(
+                    <PostCard title={post_data[i].title} body={post_data[i].body}/>
+                )
+            }
+        }
         return (
             <div>
                 <h1>Posts</h1>
@@ -35,7 +46,7 @@ export default class PostsView extends React.Component {
                     ? <h1>Loading data...</h1>
                     :
                     <div>
-                        <PostCard title={this.props.data.data.title} body={this.props.data.data.body} />
+                        {posts}
                     </div>
                 }
             </div>

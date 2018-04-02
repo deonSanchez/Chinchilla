@@ -23,11 +23,14 @@ def get_user():
 
 @app.route("/api/post", methods=["GET"])
 def get_post():
-    post = Post.query.first()
-    return jsonify(
-        title=post.title,
-        body=post.body
-    )
+    post = Post.query.all()
+    return jsonify([
+        {
+            'id': p.id,
+            'title': p.title,
+            'body': p.body
+        } for p in post
+    ])
 
 
 @app.route("/api/create_user", methods=["POST"])
