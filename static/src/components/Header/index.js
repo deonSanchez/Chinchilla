@@ -9,6 +9,8 @@ import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
+import AddCircle from 'material-ui/svg-icons/content/add-circle';
+
 
 
 import * as actionCreators from '../../actions/auth';
@@ -72,9 +74,8 @@ export class Header extends Component {
 
   render() {
     var navFlatButtonsStyle = {
-      color: 'white',
-      padding: '6px',
-    }
+      color: 'white'
+    };
 
     const actions = [
       <FlatButton
@@ -121,9 +122,9 @@ export class Header extends Component {
       title="Chinchilla"
       onLeftIconButtonTouchTap={() => this.openNav()}
       iconElementRight={
-        <div>
+        <div style={{padding: '6px'}}>
         <FlatButton label="Home" style={navFlatButtonsStyle} onClick={() => this.dispatchNewRoute('/')} />
-        <FlatButton label="Post" style={navFlatButtonsStyle} onClick={this.handleOpen} />
+        <FlatButton label={"New Post"} icon={<AddCircle />} style={navFlatButtonsStyle} onClick={this.handleOpen} />
           <Dialog
             actions={actions}
             modal={false}

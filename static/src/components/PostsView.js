@@ -22,7 +22,6 @@ export default class PostsView extends React.Component {
         this.fetchData();
     }
 
-
     fetchData() {
         this.props.fetchData();
     }
@@ -35,10 +34,14 @@ export default class PostsView extends React.Component {
 
             for (let i = 0; i < post_data.length; i++) {
                 posts.push(
-                    <PostCard title={post_data[i].title} body={post_data[i].body}/>
+                    <PostCard
+                        title={post_data[i].title}
+                        body={post_data[i].body} />,
+                    <br />
                 )
             }
         }
+
         return (
             <div>
                 <h1>Posts</h1>
