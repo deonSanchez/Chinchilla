@@ -32,7 +32,8 @@ class Post(db.Model):
     title = db.Column(db.String(255), unique=True)
     body = db.Column(db.String(255))
 
-    def __init__(self, title, body):
-        self.title = title
+    def __init__(self, title, body, author_id):
         self.active = True
+        self.title = title
         self.body = body
+        self.author = author_id

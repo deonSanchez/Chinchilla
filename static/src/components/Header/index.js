@@ -10,6 +10,7 @@ import Divider from 'material-ui/Divider';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import AddCircle from 'material-ui/svg-icons/content/add-circle';
+import Search from 'material-ui/svg-icons/action/search';
 
 
 
@@ -108,6 +109,9 @@ export class Header extends Component {
         </div>
         :
         <div>
+        <MenuItem onClick={() => this.dispatchNewRoute('/posts')}>
+        Posts
+        </MenuItem>
         <MenuItem onClick={() => this.dispatchNewRoute('/analytics')}>
         Analytics
         </MenuItem>
@@ -121,25 +125,33 @@ export class Header extends Component {
       <AppBar
       title="Chinchilla"
       onLeftIconButtonTouchTap={() => this.openNav()}
-      iconElementRight={
-        <div style={{padding: '6px'}}>
-        <FlatButton label="Home" style={navFlatButtonsStyle} onClick={() => this.dispatchNewRoute('/')} />
-        <FlatButton label={"New Post"} icon={<AddCircle />} style={navFlatButtonsStyle} onClick={this.handleOpen} />
-          <Dialog
-            actions={actions}
-            modal={false}
-            open={this.state.openDialog}
-            onRequestClose={this.handleClose}
-            >
-          <TextField
-            floatingLabelText="What's going on?"
-            multiLine={true}
-            fullWidth={true}
-            rows={2}
-            rowsMax={4}
-            /><br />
-          </Dialog>
-        </div>
+      iconElementRight=
+        {
+            !this.props.isAuthenticated ?
+            <div style={{padding: '6px'}}>
+            <FlatButton label="Posts" style={navFlatButtonsStyle} onClick={() => this.dispatchNewRoute('posts')} />
+            <FlatButton label={"Search"} icon={<Search />} style={navFlatButtonsStyle} onClick={this.handleOpen} />
+            </div>
+            :
+            <div style={{padding: '6px'}}>
+            <FlatButton label="Posts" style={navFlatButtonsStyle} onClick={() => this.dispatchNewRoute('/')} />
+            <FlatButton label={"New"} icon={<AddCircle />} style={navFlatButtonsStyle} onClick={this.handleOpen} />
+            <FlatButton label={"Search"} icon={<Search />} style={navFlatButtonsStyle} />
+              <Dialog
+                actions={actions}
+                modal={false}
+                open={this.state.openDialog}
+                onRequestClose={this.handleClose}
+                >
+              <TextField
+                floatingLabelText="What's going on?"
+                multiLine={true}
+                fullWidth={true}
+                rows={2}
+                rowsMax={4}
+                /><br />
+              </Dialog>
+            </div>
       }
       />
       </header>

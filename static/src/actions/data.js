@@ -2,6 +2,7 @@ import { FETCH_PROTECTED_DATA_REQUEST, RECEIVE_PROTECTED_DATA, FETCH_DATA_REQUES
 import { parseJSON } from '../utils/misc';
 import { data_about_user, get_all_posts } from '../utils/http_functions';
 import { logoutAndRedirect } from './auth';
+import {SUBMIT_DATA, SUBMIT_DATA_REQUEST} from "../constants";
 
 export function receiveProtectedData(data) {
     return {
@@ -66,3 +67,18 @@ export function fetchData() {
     };
 }
 
+export function submitDataRequest() {
+    return {
+        type: SUBMIT_DATA_REQUEST,
+    };
+}
+
+
+export function submitData(data) {
+    return {
+        type: SUBMIT_DATA,
+        payload: {
+            data,
+        },
+    };
+}
