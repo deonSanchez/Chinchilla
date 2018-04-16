@@ -1,8 +1,8 @@
 import { FETCH_PROTECTED_DATA_REQUEST, RECEIVE_PROTECTED_DATA, FETCH_DATA_REQUEST, RECEIVE_DATA } from '../constants/index';
 import { parseJSON } from '../utils/misc';
-import { data_about_user, get_all_posts } from '../utils/http_functions';
+import {create_post, data_about_user, get_all_posts} from '../utils/http_functions';
 import { logoutAndRedirect } from './auth';
-import {SUBMIT_DATA, SUBMIT_DATA_REQUEST} from "../constants";
+import {SUBMIT_DATA_COMPLETE, SUBMIT_DATA_REQUEST} from "../constants";
 
 export function receiveProtectedData(data) {
     return {
@@ -67,18 +67,35 @@ export function fetchData() {
     };
 }
 
-export function submitDataRequest() {
+export function submitDataRequest(token) {
     return {
         type: SUBMIT_DATA_REQUEST,
     };
 }
 
 
-export function submitData(data) {
+export function submitDataComplete(data) {
     return {
-        type: SUBMIT_DATA,
+        type: SUBMIT_DATA_COMPLETE,
         payload: {
             data,
         },
+    };
+}
+
+
+export function postProtectedData(token, title, body, location) {
+    return (dispatch) => {
+        dispatch(submitDataRequest());
+        create_post(token, title, body, location)
+            .then(parseJSON)
+            .then(response => {
+                dispatch(submitDataComplete(response.result));
+            })
+            .catch(error => {
+                if (error.status === 401) {
+                    dispatch(logoutAndRedirect(error));
+                }
+            });
     };
 }

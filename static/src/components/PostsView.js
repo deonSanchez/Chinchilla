@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/data';
 import PostCard from "./PostCard";
+import IconButton from 'material-ui/IconButton';
 
 function mapStateToProps(state) {
     return {
@@ -37,7 +38,9 @@ export default class PostsView extends React.Component {
                     <PostCard
                         title={post_data[i].title}
                         body={post_data[i].body}
-                        author={post_data[i].author} />,
+                        author={post_data[i].author}
+                        location={post_data[i].location.name}
+                        tags={post_data[i].tags }/>,
                     <br />
                 )
             }

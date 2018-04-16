@@ -55,15 +55,17 @@ def get_post():
     return jsonify(all_posts)
 
 
-@app.route("/api/post", methods=["POST"])
+@app.route("/api/create_post", methods=["POST"])
+@requires_auth
 def create_post():
     incoming = request.get_json()
 
     user = g.current_user
     new_post = Post(
         title=incoming['title'],
-        body=incoming['email'],
-        author_id=user.id
+        body=incoming['body'],
+        author_id=user['id'],
+        location=incoming['location']
     )
 
     db.session.add(new_post)
@@ -72,6 +74,8 @@ def create_post():
         db.session.commit()
     except IntegrityError:
         return jsonify(message="Something went wrong trying to make a post, whoops."), 409
+
+    return jsonify(message="Success"), 200
 
 
 @app.route("/api/create_user", methods=["POST"])

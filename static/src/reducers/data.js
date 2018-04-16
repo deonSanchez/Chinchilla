@@ -1,6 +1,8 @@
+
+import { browserHistory } from 'react-router';
 import {
     RECEIVE_PROTECTED_DATA, FETCH_PROTECTED_DATA_REQUEST, RECEIVE_DATA, FETCH_DATA_REQUEST,
-    SUBMIT_DATA, SUBMIT_DATA_REQUEST
+    SUBMIT_DATA_COMPLETE, SUBMIT_DATA_REQUEST
 } from '../constants';
 import { createReducer } from '../utils/misc';
 
@@ -31,12 +33,14 @@ export default createReducer(initialState, {
         Object.assign({}, state, {
             isFetching: true,
         }),
-    [SUBMIT_DATA]: (state, payload) =>
+    [SUBMIT_DATA_COMPLETE]: (state, payload) => {
         Object.assign({}, state, {
+            hasSubmittedPost: true,
             data: payload.data,
             isFetching: false,
             loaded: true,
-        }),
+        })
+    },
     [SUBMIT_DATA_REQUEST]: (state) =>
         Object.assign({}, state, {
             isFetching: true,

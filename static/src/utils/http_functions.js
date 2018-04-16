@@ -47,3 +47,16 @@ export function data_about_user(token) {
 export function get_all_posts() {
     return axios.get('/api/post');
 }
+
+export function create_post(token, title, body, location) {
+
+    return axios.post(
+        '/api/create_post',
+        {
+            title,
+            body,
+            location,
+        },
+        tokenConfig(token)
+    );
+}
