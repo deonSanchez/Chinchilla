@@ -144,7 +144,7 @@ export class Header extends Component {
                     }
                 </LeftNav>
                 <AppBar
-                    title="Chinchilla"
+                    title="Dist Web Project"
                     onLeftIconButtonTouchTap={() => this.openNav()}
                     iconElementRight=
                         {

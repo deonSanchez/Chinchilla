@@ -6,7 +6,7 @@ import Chip from 'material-ui/Chip';
 
 const styles = {
   chip: {
-    //margin: 4,
+    marginRight: 4,
   },
   wrapper: {
         display: 'flex',

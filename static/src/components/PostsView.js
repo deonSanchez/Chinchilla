@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/data';
 import PostCard from "./PostCard";
 import IconButton from 'material-ui/IconButton';
+import AddCircle from 'material-ui/svg-icons/navigation/refresh';
 
 function mapStateToProps(state) {
     return {
@@ -12,6 +13,12 @@ function mapStateToProps(state) {
         isFetching: state.data.isFetching,
     };
 }
+
+const wrapperStyles = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'baseline'
+};
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch);
@@ -48,7 +55,12 @@ export default class PostsView extends React.Component {
 
         return (
             <div>
-                <h1>Posts</h1>
+                <div style={wrapperStyles}>
+                    <h1>Posts</h1>
+                    <IconButton tooltip="Refresh" onClick={this.props.fetchData}>
+                        <AddCircle />
+                    </IconButton>
+                </div>
                 {!this.props.loaded
                     ? <h1>Loading data...</h1>
                     :
