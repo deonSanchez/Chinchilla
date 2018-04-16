@@ -1,5 +1,5 @@
 from flask import request, render_template, jsonify, url_for, redirect, g
-from .models import User, Post
+from .models import User, Post, Tag, TagToPost, Location
 from index import app, db
 from sqlalchemy.exc import IntegrityError
 from .utils.auth import generate_token, requires_auth, verify_token
@@ -23,18 +23,36 @@ def get_user():
 
 @app.route("/api/post", methods=["GET"])
 def get_post():
-    post = Post.query.all()
-    return jsonify([
-        {
-            'id': p.id,
-            'title': p.title,
-            'body': p.body,
-            'author': {
-                'username': User.query.get(p.author).username,
-                'email': User.query.get(p.author).email
+    posts = Post.query.all()
+
+    all_posts = []
+    for p in posts:
+        tag_bridges = TagToPost.query.filter_by(post=p.id)
+        tags = [Tag.query.get(tag_bridge.tag) for tag_bridge in tag_bridges]
+        location = Location.query.get(p.location)
+
+        all_posts.append(
+            {
+                'id': p.id,
+                'title': p.title,
+                'body': p.body,
+                'author': {
+                    'username': User.query.get(p.author).username,
+                    'email': User.query.get(p.author).email
+                },
+                'location': {
+                    'name': location.name
+                },
+                'tags': [
+                    {
+                        'name': tag.name,
+                        'color': tag.color
+                    } for tag in tags
+                ]
             }
-        } for p in post
-    ])
+        )
+
+    return jsonify(all_posts)
 
 
 @app.route("/api/post", methods=["POST"])
