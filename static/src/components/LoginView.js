@@ -112,6 +112,10 @@ export default class LoginView extends React.Component {
         this.props.loginUser(this.state.email, this.state.password, this.state.redirectTo);
     }
 
+    register(e){
+
+    }
+
     render() {
         return (
             <div className="col-md-6 col-md-offset-3" onKeyPress={(e) => this._handleKeyPress(e)}>
@@ -145,12 +149,17 @@ export default class LoginView extends React.Component {
                                 />
                             </div>
 
-                            <RaisedButton
-                              disabled={this.state.disabled}
-                              style={{ marginTop: 50 }}
-                              label="Submit"
-                              onClick={(e) => this.login(e)}
-                            />
+                            <div>
+                                <RaisedButton
+                                  disabled={this.state.disabled}
+                                  style={{ marginTop: 50 }}
+                                  label="Submit"
+                                  onClick={(e) => this.login(e)}
+                                />
+                            </div>
+                            <div>
+                                <RaisedButton/>
+                            </div>
 
                         </div>
                     </form>
