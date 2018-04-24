@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const tokenConfig = (token) => ({
     headers: {
-        'Authorization': token, // eslint-disable-line quote-props
+        'Authorization': token,
     },
 });
 
@@ -12,13 +12,6 @@ export function validate_token(token) {
     return axios.post('/api/is_token_valid', {
         token,
     });
-}
-
-export function get_github_access() {
-    window.open(
-        '/github-login',
-        '_blank' // <- This is what makes it open in a new window.
-    );
 }
 
 export function create_user(email, username, password) {
@@ -49,7 +42,6 @@ export function get_all_posts() {
 }
 
 export function create_post(token, title, body, location) {
-
     return axios.post(
         '/api/create_post',
         {

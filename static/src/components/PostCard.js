@@ -1,6 +1,5 @@
 import React from 'react';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import Chip from 'material-ui/Chip';
 
@@ -43,10 +42,6 @@ const CardExampleWithAvatar = (props) => {
             <div style={styles.wrapper}>
                 {tags}
             </div>
-            {/*<CardActions>*/}
-                {/*<FlatButton label="Upvote"/>*/}
-                {/*<FlatButton label="Downvote"/>*/}
-            {/*</CardActions>*/}
         </Card>
     )
 };

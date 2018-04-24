@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { browserHistory } from 'react-router';
 import * as actionCreators from '../actions/auth';
 
 function mapStateToProps(state) {
@@ -38,8 +37,7 @@ export function requireNoAuthentication(Component) {
 
         checkAuth(props = this.props) {
             if (props.isAuthenticated) {
-                // browserHistory.push('/main');
-
+                // do nothing
             } else {
                 const token = localStorage.getItem('token');
                 if (token) {
@@ -55,7 +53,6 @@ export function requireNoAuthentication(Component) {
                         .then(res => {
                             if (res.status === 200) {
                                 this.props.loginUserSuccess(token);
-                                // browserHistory.push('/main');
 
                             } else {
                                 this.setState({

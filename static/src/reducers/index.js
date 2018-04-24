@@ -5,7 +5,6 @@ import data from './data';
 
 const rootReducer = combineReducers({
     routing: routerReducer,
-    /* your reducers */
     auth,
     data,
 });
