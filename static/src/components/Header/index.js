@@ -10,7 +10,6 @@ import Divider from 'material-ui/Divider';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import AddCircle from 'material-ui/svg-icons/content/add-circle';
-import Search from 'material-ui/svg-icons/action/search';
 
 
 import * as actionCreators from '../../actions/auth';
@@ -133,12 +132,6 @@ export class Header extends Component {
                                 <MenuItem onClick={() => this.dispatchNewRoute('/posts')}>
                                     Posts
                                 </MenuItem>
-                                <MenuItem onClick={() => this.dispatchNewRoute('/analytics')}>
-                                    Analytics
-                                </MenuItem>
-                                <MenuItem onClick={() => this.dispatchNewRoute('/settings')}>
-                                    Settings
-                                </MenuItem>
                                 <Divider/>
                                 <MenuItem onClick={(e) => this.logout(e)}>
                                     Logout
@@ -155,8 +148,6 @@ export class Header extends Component {
                                 <div style={{padding: '6px'}}>
                                     <FlatButton label="Posts" style={navFlatButtonsStyle}
                                                 onClick={() => this.dispatchNewRoute('posts')}/>
-                                    <FlatButton label={"Search"} icon={<Search/>} style={navFlatButtonsStyle}
-                                                onClick={this.handleOpen}/>
                                 </div>
                                 :
                                 <div style={{padding: '6px'}}>
@@ -164,7 +155,6 @@ export class Header extends Component {
                                                 onClick={() => this.dispatchNewRoute('/')}/>
                                     <FlatButton label={"New"} icon={<AddCircle/>} style={navFlatButtonsStyle}
                                                 onClick={this.handleOpen}/>
-                                    <FlatButton label={"Search"} icon={<Search/>} style={navFlatButtonsStyle}/>
                                     <Dialog
                                         actions={actions}
                                         modal={false}
