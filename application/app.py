@@ -24,6 +24,8 @@ def get_user():
 @app.route("/api/post", methods=["GET"])
 def get_post():
     posts = Post.query.all()
+    print('QUERY')
+    print(str(Post.query.all()))
 
     all_posts = []
     for p in posts:

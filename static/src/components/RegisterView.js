@@ -83,7 +83,7 @@ export default class RegisterView extends React.Component {
             });
         } else {
             this.setState({
-                username_error_text: 'This username sucks, pick a new one',
+                username_error_text: 'This username is too short, please pick a new one.',
             });
         }
 
